@@ -259,7 +259,11 @@ export const AnalysisResultCard: React.FC<AnalysisResultCardProps> = ({ analysis
             <div className="p-4 bg-slate-100 flex items-center justify-center min-h-[300px]">
               <div className="relative inline-block max-h-[340px] max-w-full">
                 <img
-                  src={`/static/uploads/${analysis.stored_path.split(/[\\/]/).pop()}`}
+                  src={
+                    analysis.stored_path.startsWith('blob:') || analysis.stored_path.startsWith('data:')
+                      ? analysis.stored_path
+                      : `/static/uploads/${analysis.stored_path.split(/[\\/]/).pop()}`
+                  }
                   alt="Analyzed target"
                   className="max-h-[340px] max-w-full rounded border border-slate-200 object-contain shadow-xs block"
                 />
